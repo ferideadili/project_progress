@@ -1,0 +1,112 @@
+{% extends 'layout_admin.html' %}
+{% block body %}
+<script>
+
+    // The data table
+    var oTable = null;
+    $.extend($.fn.dataTableExt.oStdClasses, {
+        "sFilterInput": "form-control",
+        "sLengthSelect": "form-control"
+    });
+    // Get all languages currently supported
+    var newRowData = $.ajax({
+        url: "{{ url_for('admin.get_all_languages') }}", //this is the submit URL
+        type: 'GET', //or POST,
+        dataType: 'json',
+        async: false,
+    }).responseJSON;
+
+    //console.log(newRowData);
+
+
+    $(document).ready(function () {
+        // Function to init the supported language table
+        function init_table(newRowData) {
+            oTable = $('#languageTable').DataTable({
+                "aaData": newRowData,
+                "bSort": false,
+                "aoColumns": [
+                    {"mDataProp": "code"},
+                    {"mDataProp": "name.english"},
+                    {"mDataProp": "name.native"},
+                    {"sDefaultContent": "<a  class='edit-language' id='' style='padding-right:20px'><i class='fa fa-pencil-square-o fa-lg edit-group' aria-hidden='true'></i></a>" + "<a href='#' class='remove-language'><i class='fa fa-trash-o fa-lg' aria-hidden='true'></i></a>"},
+                ],
+                "oLanguage": {
+                    "sInfo": "_TOTAL_ entries"
+                }
+            });
+        }
+
+        // Init the supported language table
+        init_table(newRowData);
+
+        $('#languageTable tbody').addClass("DragMe");
+            $('.DragMe').sortable({
+                disabled: false,
+                axis: 'y',
+                forceHelperSize: true,
+                update: function (event, ui) {
+
+                    // Array that will contain the supported langs in their new order
+                    var payload = {}
+                    var langs = new Array();
+                    $("#languageTable tr:has(td)").each(function () {
+
+                        var code = $(this).find("td:eq(0)").html();
+                        var englishName = $(this).find("td:eq(1)").html();
+                        var nativeName = $(this).find("td:eq(2)").html();
+                        langs.push({
+                            'code': code,
+                            'name': {
+                                'english': englishName,
+                                'native': nativeName
+                            }
+                        })
+                    })
+                    $.ajax({
+                        url: "{{ url_for('admin.update_languages') }}", // this is the submit URL
+                        type: 'POST', //or POST,
+                        contentType: 'application/json',
+                        data: JSON.stringify(langs),
+                        success: function (data) {
+                        }
+                    });
+                }
+            }).disableSelection();
+    });
+
+
+</script>
+
+
+<!-- Page Heading -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-2">
+                   <a class="btn btn-primary" href="{{ url_for('admin.add_language') }}"style="width:100%;">Add Language</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-lg-12">
+                <table id="languageTable" class="stripe">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>English Name</th>
+                            <th>Native Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

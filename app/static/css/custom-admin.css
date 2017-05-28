@@ -1,0 +1,17 @@
+.top-nav{
+	background: #000000;
+}
+.top-nav>li>a{
+	color:#ffffff;
+	font-weight:bold;
+}
+#page-wrapper{
+	padding-top: 50px;
+	min-height: 600px;height:auto
+}
+.row{
+	margin-bottom: 20px;
+}
+.btn-primary, .btn-default{
+	width: 100%;
+}

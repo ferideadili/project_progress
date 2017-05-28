@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div class="col-md-offset-1 col-sm-5">
+        <h2>Register</h2>
+        <form action="{{ url_for('auth.registeruser') }}" method="POST" name="register_user_form" id="login-form" enctype="multipart/form-data" >
+            {% if error %}
+                <div class="alert alert-danger">
+                    {{ error }}
+                </div>
+            {% endif %}
+            <label><b>Email</b></label>
+            <input class="form-control" id="email" name="email" type="email" value=""><br/>
+
+            <label><b>Password</b></label>
+            <input class="form-control" id="password" name="password" type="password" value=""><br/>
+
+            <label><b>Retype Password</b></label>
+            <input class="form-control" id="password_confirm" name="password_confirm" type="password" value=""><br/>
+            <div align="right">
+                <button type="submit" class="btn btn-primary">Register</button>
+                <br><br><br>
+            </div>
+        </form>
+    </div>
+        <div class="col-md-5">
+            <h2>Login</h2>
+            <form id="login-form" action="{{ url_for('auth.login') }}" method="POST" role="form" data-toggle="validator">
+                <label><b>Email</b></label>
+                <input class="form-control" id="email" name="email" type="email" value=""><br/>
+
+                <label><b>Password</b></label>
+                <input class="form-control" id="password" name="password" type="password" value="">
+                <div class="help-block with-errors"></div>
+                {% if error %}
+                    <div class="alert alert-danger">
+                        {{ error }}
+                    </div>
+                {% endif %}
+                <div align="right">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <br><br><br>
+                </div>
+            </form>
+        </div>
+{% endblock %}

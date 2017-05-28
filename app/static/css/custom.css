@@ -1,0 +1,38 @@
+@media (min-width: 768px) {
+    .navbar-right {
+        float: right !important;
+        margin-right: 40px;
+    }
+}
+.navbar-default .navbar-nav>li>a{
+    color:#ffffff;
+    text-transform: uppercase;
+}
+#page-wrapper{
+    margin-top:100px;
+}
+.btn-primary, .form-control{
+    border-radius: 0px;
+}
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #337ab7;
+    text-align: center;
+    color:#ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+.navbar-header {
+    padding: 20px;
+}
+.navbar-header a{
+    color:#ffffff;
+}
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover{
+    background:#337ab7;
+}

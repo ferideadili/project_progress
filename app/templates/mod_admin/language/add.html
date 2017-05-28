@@ -1,0 +1,68 @@
+{% extends 'layout_admin.html' %}
+{% block body %}
+	<script>
+		$(document).ready(function () {
+			$( ".btn-add-lang" ).click(function() {
+			  	var selected_lang = $("#language_select option:selected");
+			  	// Build lang document
+			  	var lang = {
+					'code': selected_lang.val(),
+					'name': {
+						'english': selected_lang.data('english-name'),
+						'native': selected_lang.data('native-name')
+					}
+			  	}
+			  	addLanguage(lang);
+			});
+			function addLanguage(lang){
+				$.ajax({
+					url: "{{ url_for('admin.add_language') }}",
+					type: 'POST',
+					contentType: 'application/json',
+					data: JSON.stringify(lang),
+					async: false,
+					success: function (data) {
+						window.location = "{{ url_for('admin.manage_language') }}";
+					}
+				});
+			}
+		});
+	</script>
+
+	<div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                    <form class="form-horizontal" role="form" name="add_language_form" method="POST">
+                        <fieldset class="scheduler-border">
+                            <legend class="scheduler-border">Add Language</legend>
+                            <div class="form-group">
+                                <label for="language_select" class="col-sm-3 control-label">
+                                    Language
+                                </label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="language_select" name="language_select">
+                                        <option value="0">Select Language</option>
+                                        <option value="en" data-native-name="English" data-english-name="English">English</option>
+                                        <option value="al" data-native-name="Shqip" data-english-name="Albanian">Albanian</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-3 col-md-3">
+                                    <a href="{{ url_for('admin.manage_language') }}" class="btn btn-default width-100 border-radius-0">Cancel</a>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-primary btn-add-lang">
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+		        </div>
+            </div>
+        </div>
+	</div>
+
+{% endblock %}
