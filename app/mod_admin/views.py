@@ -1,7 +1,7 @@
 from flask import Blueprint
 # coding=utf-8
 import pprint
-from app import mongo_utils, mongo,UPLOAD_FOLDER,ALLOWED_EXTENSIONS,project_utils,settings_utils
+from app import mongo,UPLOAD_FOLDER,ALLOWED_EXTENSIONS,project_utils,settings_utils
 from bson import json_util, ObjectId
 from flask import Blueprint, render_template, request, Response, redirect, url_for, flash,session
 import os, json

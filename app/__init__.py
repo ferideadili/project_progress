@@ -4,13 +4,13 @@ import os
 import ConfigParser
 from flask.ext.pymongo import PyMongo
 from logging.handlers import RotatingFileHandler
-from app.utils.mongo_utils import MongoUtils
+
 from flask.ext.security import Security, MongoEngineUserDatastore, UserMixin, RoleMixin
 from flask.ext.bcrypt import Bcrypt
 from flask.ext.login import LoginManager
 from bson.objectid import ObjectId
 from flask_mongoengine import MongoEngine
-from app.utils.mongo_utils import MongoUtils
+
 from app.utils.user_mongo_utils import UserMongoUtils
 from app.utils.mongo_projects_utils import MongoProjectsUtils
 from app.utils.mongo_settings_utils import MongoSettingsUtils
@@ -22,7 +22,7 @@ mongo = PyMongo()
 login_manager = LoginManager()
 
 # Initialize mongo access point
-mongo_utils = MongoUtils(mongo)
+
 user_utils = UserMongoUtils(mongo)
 project_utils = MongoProjectsUtils(mongo)
 settings_utils = MongoSettingsUtils(mongo)
