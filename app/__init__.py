@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask,request,render_template,redirect
 from os.path import join, dirname, realpath
 import os
 import ConfigParser
@@ -57,8 +57,10 @@ def create_app():
     mongo.init_app(app, config_prefix='MONGO')
 
     security.init_app(app, user_datastore)
+
     # Init modules
     init_modules(app)
+
     return app
 
 

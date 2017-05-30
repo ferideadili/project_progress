@@ -13,4 +13,7 @@ mod_main = Blueprint('main', __name__)
 
 @mod_main.route('/', methods=['GET'])
 def index():
-    return render_template('mod_main/index.html')
+    theme = request.args.get('theme')
+    return render_template('mod_main/index.html',theme=theme)
+
+

@@ -43,8 +43,8 @@ def logout():
 @mod_auth.route('/register/user', methods=['GET', 'POST'])
 def registeruser():
     if request.method == "GET":
-        # Return the login form template
-        return render_template('mod_auth/register.html')
+        theme = request.args.get('theme')
+        return render_template('mod_auth/register.html',theme=theme)
     else:
         form = request.form
         email = form['email']
@@ -70,4 +70,4 @@ def registeruser():
                 result = user_datastore.add_role_to_user(user, role)
                 login_user(user)
 
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.index',theme=theme))
