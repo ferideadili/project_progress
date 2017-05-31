@@ -12,8 +12,11 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" type="text/css" />
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" type="text/css" >
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/custom.css') }}" type="text/css">
-
+    {% if theme=="black" %}
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/custom_black.css') }}" type="text/css">
+    {% else %}
+         <link rel="stylesheet" href="{{ url_for('static',filename='css/custom.css') }}" type="text/css">
+    {% endif %}
     <!-- JS -->
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
@@ -38,18 +41,19 @@
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                     </button>
-                    <a href="{{ url_for('main.index')}}"><i class="fa fa-home" aria-hidden="true"></i> HOME</a>
+                    <a href="{{ url_for('main.root',theme=g.current_theme)}}"><i class="fa fa-home" aria-hidden="true"></i> HOME</a>
                 </div>
               <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
                     <ul class="nav navbar-nav navbar-right">
                         {% if current_user.is_authenticated %}
                             {% if current_user.role == 'admin-user' %}
                                 <li><a href="#" class="title-menu-text"><i class="fa fa-list" aria-hidden="true"></i> Dashboard</a></li>
                              {% endif %}
-                            <li><a href="{{url_for('auth.logout')}}" class="title-menu-text"><i class="fa fa-power-off" aria-hidden="true"></i> Log Out</a></li>
+                            <li><a href="{{url_for('auth.logout',theme=g.current_theme)}}" class="title-menu-text"><i class="fa fa-power-off" aria-hidden="true"></i> Log Out</a></li>
                         {% else %}
-                            <li><a href="{{ url_for('auth.registeruser')}}" class="title-menu-text"><i class="fa fa-user" aria-hidden="true"></i> Login / Register</a></li>
+                            <li><a href="{{ url_for('auth.registeruser',theme=g.current_theme )}}" class="title-menu-text"><i class="fa fa-user" aria-hidden="true"></i> Login / Register</a></li>
                       {% endif %}
                     </ul>
                 </div>
@@ -65,6 +69,18 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
+                    <p align="right" class="right-elements">Choose theme</p>
+                    <ul class="nav navbar-nav navbar-right themes">
+                        <li><a href="#" class="selected theme" data-theme="default-theme">Default</a></li>
+                        <li><a href="#" class="theme" data-theme="black-theme">Black</a></li>
+                     </ul><br/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+
                     {% block body %}
 
                     {% endblock %}
@@ -92,3 +108,17 @@
 <!-- end block footer -->
 </body>
 </html>
+<script>
+
+    /* on click of choose theme links, if its clicked black theme, add querystring paramater, else remove any */
+    $('.theme').on('click',function(e){
+        var theme=$(this).attr('data-theme');
+        if (theme=="black-theme"){
+              var url = location.href.replace("default", 'black');
+                window.location.href = url;
+        }else{
+            var url = location.href.replace("black", 'default');
+            window.location.href = url;
+        }
+    });
+</script>

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask,request,render_template,redirect,g
 from os.path import join, dirname, realpath
 import os
 import ConfigParser
@@ -57,8 +57,15 @@ def create_app():
     mongo.init_app(app, config_prefix='MONGO')
 
     security.init_app(app, user_datastore)
+
     # Init modules
     init_modules(app)
+
+    @app.before_request
+    def before():
+        if request.view_args and 'theme' in request.view_args:
+            g.current_theme = request.view_args['theme']
+            request.view_args.pop('theme')
     return app
 
 

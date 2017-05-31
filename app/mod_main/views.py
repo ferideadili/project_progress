@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint,g
 # coding=utf-8
 import pprint
 from app import mongo,UPLOAD_FOLDER,ALLOWED_EXTENSIONS,user_utils
@@ -13,4 +13,9 @@ mod_main = Blueprint('main', __name__)
 
 @mod_main.route('/', methods=['GET'])
 def index():
-    return render_template('mod_main/index.html')
+    return redirect("/default")
+
+@mod_main.route('/<theme>', methods=['GET'])
+def root():
+    return render_template('mod_main/index.html',theme=g.current_theme)
+
