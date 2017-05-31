@@ -1,4 +1,46 @@
 {% extends 'layout.html' %}
 {% block body %}
+<script>
+$(window).load(function () {
+    function init_projects() {
+
+            $.ajax({
+                type: "GET",
+                url: "{{ url_for("static",filename="data/projects.json") }}",
+                async: false,
+                dataType: 'json',
+                success: function (response) {
+                    $(response).each(function(index,value){
+
+                        $('.projects').append('<div class="col-md-6"><div class="tile">' +
+                                '<p class="title">'+value['name']+'</p>' +
+                                '<p class="description">'+value['description']+'</p>' +
+                                '<div class="col-md-12 tile-options">' +
+                                '<div class="col-md-6 options"><p>Retail</p></div>' +
+                                '<div class="col-md-6 options"><p>Healthcare</p></div>' +
+                                '</div>' +
+                                '<div class="col-md-12 other">' +
+                                '<div class="col-md-6"><p>Created at: '+value['createdAt']+'</p></div>' +
+                                '<div class="col-md-6 emails"><span class="number">'+value['notes'].length+'</span><i class="fa fa-envelope" aria-hidden="true"></i></div>' +
+                                '</div>' +
+                                '</div></div>')
+                    });
+
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+        init_projects();
+})
+</script>
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8 projects">
+
+                <div class="col-md-offset-2"></div>
+
+        </div>
+    </div>
 
 {% endblock %}

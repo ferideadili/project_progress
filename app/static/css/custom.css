@@ -86,3 +86,42 @@ ul.lang{
     display: block;
     float: right;
 }
+.tile{
+    padding: 20px;
+    min-height:250px;
+    background: #1b6d85;
+}
+.tile .title{
+    font-weight: bold;
+    font-size:20px;
+    color:#ffffff;
+}
+.tile .description{
+    color:#ffffff;
+    border-bottom: 1px solid #ffffff;
+    padding-bottom: 10px;
+}
+.tile .options{
+    text-align: center;
+    color:#ffffff;
+    font-size:20px;
+    font-weight: bold;
+    cursor:pointer;
+    padding-top:20px;
+}
+.tile-options{
+    border-bottom:1px solid #ffffff;
+    padding-bottom: 10px;
+}
+.tile .other{
+    padding-top: 20px;
+    color:#ffffff;
+}
+.tile .emails{
+   text-align: right;
+    cursor: pointer;
+    font-size: 20px;
+}
+.emails .number{
+    padding-right: 10px;
+}
