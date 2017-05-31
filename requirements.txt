@@ -11,3 +11,5 @@ flask-Login==0.3.2
 slugify==0.0.1
 MarkupSafe==1.0
 Flask-Principal==0.4.0
+Flask-Babel==0.9
+Babel==2.3.4

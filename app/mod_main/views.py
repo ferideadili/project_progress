@@ -13,9 +13,10 @@ mod_main = Blueprint('main', __name__)
 
 @mod_main.route('/', methods=['GET'])
 def index():
-    return redirect("/default")
+    return redirect("/en/theme/default")
 
-@mod_main.route('/<theme>', methods=['GET'])
+@mod_main.route('/<lang_code>/theme/<theme>', methods=['GET'])
 def root():
-    return render_template('mod_main/index.html',theme=g.current_theme)
+    print g.current_lang
+    return render_template('mod_main/index.html',theme=g.current_theme,lang_code=g.current_lang)
 

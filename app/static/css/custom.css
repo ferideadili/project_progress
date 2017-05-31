@@ -9,7 +9,7 @@
     text-transform: uppercase;
 }
 #page-wrapper{
-    margin-top:100px;
+    margin-top:150px;
 }
 .btn-primary, .form-control{
     border-radius: 0px;
@@ -47,4 +47,42 @@
 .right-elements{
     margin-right: 40px;
     text-transform: uppercase;
+}
+.nav>li>a.theme:focus, .nav>li>a.theme:hover{
+    color:#000000;
+}
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover{
+    color:#ffffff;
+}
+@media (max-width: 500px) {
+    .footer {
+        position:relative;
+    }
+    .themes{
+        width:30%;
+        text-align: center;
+
+        margin-right:40px;
+    }
+}
+.lang ul{
+    list-style: none;
+    margin-top:20px;
+
+}
+.lang ul li a{
+    color:#ffffff;
+    padding: 10px;
+    text-transform: uppercase;
+     cursor: pointer;
+}
+.lang ul li{
+    float:left;
+}
+.themes{
+    margin-right: 20px;
+}
+ul.lang{
+    display: block;
+    float: right;
 }
