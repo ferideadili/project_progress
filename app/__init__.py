@@ -10,7 +10,7 @@ from flask.ext.bcrypt import Bcrypt
 from flask.ext.login import LoginManager
 from bson.objectid import ObjectId
 from flask_mongoengine import MongoEngine
-
+from flask.ext.babel import Babel
 from app.utils.user_mongo_utils import UserMongoUtils
 from app.utils.mongo_projects_utils import MongoProjectsUtils
 from app.utils.mongo_settings_utils import MongoSettingsUtils
@@ -36,6 +36,7 @@ user_datastore = MongoEngineUserDatastore(db, User, Role)
 security = Security()
 
 bcrypt = Bcrypt()
+babel = Babel()
 
 
 def create_app():
@@ -60,12 +61,22 @@ def create_app():
 
     # Init modules
     init_modules(app)
+    babel.init_app(app)
+
+    # Get local based on domain name used.
+    @babel.localeselector
+    def get_locale():
+        """Direct babel to use the language defined in the session."""
+        return g.get('current_lang', 'en')
 
     @app.before_request
     def before():
         if request.view_args and 'theme' in request.view_args:
             g.current_theme = request.view_args['theme']
             request.view_args.pop('theme')
+        if request.view_args and 'lang_code' in request.view_args:
+            g.current_lang = request.view_args['lang_code']
+            request.view_args.pop('lang_code')
     return app
 
 
