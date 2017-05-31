@@ -1,0 +1,32 @@
+[{
+  "id":1,
+  "name":"Project x",
+  "description":"Project x description",
+  "createdAt":"5/31/2017",
+  "notes":[
+    {
+      "email":"email 0",
+      "text":"text 0",
+      "subject":"subject 0"
+    },
+    {
+      "email":"email 1",
+      "text":"text 1",
+      "subject":"subject 1"
+    }
+  ]
+},
+  {
+    "id": 2,
+    "name": "Project y",
+    "description": "Project y description",
+    "createdAt": "5/31/2017",
+    "notes": [
+      {
+        "email": "email project y 0",
+        "text": "text project y 0",
+        "subject": "subject project y 0"
+      }
+    ]
+  }
+]
