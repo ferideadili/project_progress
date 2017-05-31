@@ -6,21 +6,23 @@
     <title>Project progress</title>
 
     <!--CSS-->
-    <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet"
+          type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" type="text/css"/>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" type="text/css" />
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" type="text/css" >
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" type="text/css"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" type="text/css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" type="text/css">
     {% if theme=="black" %}
         <link rel="stylesheet" href="{{ url_for('static',filename='css/custom_black.css') }}" type="text/css">
     {% else %}
-         <link rel="stylesheet" href="{{ url_for('static',filename='css/custom.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/custom.css') }}" type="text/css">
     {% endif %}
     <!-- JS -->
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -31,43 +33,46 @@
     <![endif]-->
 </head>
 {% block header %}
-<!-- Navigation -->
-<!-- Header -->
+    <!-- Navigation -->
+    <!-- Header -->
     <div class="container-fluid">
         <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
             <div class="bg-primary bg-header">
-              <!-- Brand and toggle get grouped for better mobile display -->
+                <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                     </button>
 
-                    <a href="{{ url_for('main.root',theme=g.current_theme,lang_code=g.current_lang)}}"><i class="fa fa-home" aria-hidden="true"></i> {{ _('HOME') }}</a>
+                    <a href="{{ url_for('main.root',theme=g.current_theme,lang_code=g.current_lang) }}"><i
+                            class="fa fa-home" aria-hidden="true"></i> {{ _('HOME') }}</a>
                 </div>
-             <div class="row lang">
-                         <ul class="lang">
-                            <li><a class="language-switch">en</a></li>
-                            <li><a class="language-switch">sq</a></li>
-                        </ul><br/>
-                    </div>
-              <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-                    <ul class="nav navbar-nav navbar-right lang">
-
-                        {% if current_user.is_authenticated %}
-                            {% if current_user.role == 'admin-user' %}
-                                <li><a href="#" class="title-menu-text"><i class="fa fa-list" aria-hidden="true"></i> Dashboard</a></li>
-                             {% endif %}
-                            <li><a href="{{url_for('auth.logout',theme=g.current_theme)}}" class="title-menu-text"><i class="fa fa-power-off" aria-hidden="true"></i> Log Out</a></li>
-                        {% else %}
-                            <li><a href="{{ url_for('auth.registeruser',theme=g.current_theme )}}" class="title-menu-text"><i class="fa fa-user" aria-hidden="true"></i> {{ _('Login / Register') }}</a></li>
-                      {% endif %}
+                <div class="row lang">
+                    <ul class="lang">
+                        <li><a class="language-switch">en</a></li>
+                        <li><a class="language-switch">sq</a></li>
                     </ul>
                 </div>
-              <!-- /.navbar-collapse -->
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right lang">
+                        {% if current_user.is_authenticated %}
+                            {% if current_user.role == 'admin-user' %}
+                                <li><a href="#" class="title-menu-text"><i class="fa fa-list" aria-hidden="true"></i>Dashboard</a></li>
+                            {% endif %}
+                            <li><a href="{{ url_for('auth.logout',theme=g.current_theme,lang_code=g.current_lang) }}"
+                                   class="title-menu-text"><i class="fa fa-power-off" aria-hidden="true"></i> Log Out</a></li>
+                        {% else %}
+                            <li>
+                                <a href="{{ url_for('auth.registeruser',theme=g.current_theme,lang_code=g.current_lang ) }}" class="title-menu-text"><i class="fa fa-user" aria-hidden="true"></i> {{ _('Login / Register') }}</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
             </div>
-          <!-- /.container-fluid -->
+            <!-- /.container-fluid -->
         </nav>
     </div>
 {% endblock %}
@@ -81,7 +86,8 @@
                     <ul class="nav navbar-nav navbar-left themes">
                         <li><a href="#" class="selected theme" data-theme="default-theme">{{ _('Default') }}</a></li>
                         <li><a href="#" class="theme" data-theme="black-theme">{{ _('Black') }}</a></li>
-                     </ul><br/>
+                    </ul>
+                    <br/>
                 </div>
             </div>
         </div>
@@ -98,7 +104,7 @@
     </div>
 </div>
 {% block footer %}
-<!-- Footer -->
+    <!-- Footer -->
     <div class="footer">
         <div class="container-fluid">
             <div class="row">
@@ -117,25 +123,26 @@
 </body>
 </html>
 <script>
- $(".language-switch").click(function(e){
-     var value = "/"+$( this ).text();
-     if (value=="/en"){
-         var url = location.href.replace("sq", 'en');
-         window.location.href = url;
-     }else{
-         var url = location.href.replace("en", 'sq');
-         window.location.href = url;
-     }
- });
- /* on click of choose theme links, if its clicked black theme, add querystring paramater, else remove any */
- $('.theme').on('click',function(e){
-     var theme=$(this).attr('data-theme');
-     if (theme=="black-theme"){
-         var url = location.href.replace("default", 'black');
-         window.location.href = url;
-        }else{
-         var url = location.href.replace("black", 'default');
-         window.location.href = url;
-     }
+    $(".language-switch").click(function () {
+        var value = "/" + $(this).text();
+        if (value == "/en") {
+            var url = location.href.replace("sq", 'en');
+            window.location.href = url;
+        } else {
+            var url = location.href.replace("en", 'sq');
+            window.location.href = url;
+        }
+    });
+    /* on click of choose theme links, if its clicked black theme, add querystring paramater, else remove any */
+    $('.theme').on('click', function () {
+        var theme = $(this).attr('data-theme');
+        if (theme == "black-theme") {
+            var url = location.href.replace("default", 'black');
+            window.location.href = url;
+        }
+        else {
+            var url = location.href.replace("black", 'default');
+            window.location.href = url;
+        }
     });
 </script>

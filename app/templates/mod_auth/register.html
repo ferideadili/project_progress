@@ -3,7 +3,7 @@
 {% block body %}
     <div class="col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col-sm-5 col-md-5 col-xs-10">
         <h2>Register</h2>
-        <form action="{{ url_for('auth.registeruser',theme=g.current_theme) }}" method="POST" name="register_user_form" id="login-form" enctype="multipart/form-data" >
+        <form action="{{ url_for('auth.registeruser',theme=g.current_theme,lang_code=g.current_lang) }}" method="POST" name="register_user_form" id="login-form" enctype="multipart/form-data" >
             {% if error %}
                 <div class="alert alert-danger">
                     {{ error }}
@@ -18,6 +18,7 @@
 
             <label><b>Retype Password</b></label>
             <input class="form-control" id="password_confirm" name="password_confirm" type="password" value=""><br/>
+
             <div align="right">
                 <button type="submit" class="btn btn-primary">Register</button>
                 <br><br><br>
@@ -26,19 +27,21 @@
     </div>
         <div class="col-xs-offset-1 col-sm-5 col-md-5 col-xs-10">
             <h2>Login</h2>
-            <form id="login-form" action="{{ url_for('auth.login',theme=g.current_theme) }}?theme={{ theme }}" method="POST" role="form" data-toggle="validator">
+            <form id="login-form" action="{{ url_for('auth.login',theme=g.current_theme,lang_code=g.current_lang) }}" method="POST" role="form" data-toggle="validator">
 
                 <label><b>Email</b></label>
                 <input class="form-control" id="email" name="email" type="email" value=""><br/>
 
                 <label><b>Password</b></label>
                 <input class="form-control" id="password" name="password" type="password" value="">
+
                 <div class="help-block with-errors"></div>
                 {% if error %}
                     <div class="alert alert-danger">
                         {{ error }}
                     </div>
                 {% endif %}
+
                 <div align="right">
                     <button type="submit" class="btn btn-primary">Login</button>
                     <br><br><br>

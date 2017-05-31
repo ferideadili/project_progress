@@ -4,7 +4,7 @@ from flask.ext.security import login_user, logout_user
 import os, json
 
 
-mod_auth = Blueprint('auth', __name__, url_prefix='/<theme>/auth')
+mod_auth = Blueprint('auth', __name__, url_prefix='/<lang_code>/theme/<theme>/auth')
 
 @mod_auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -17,10 +17,10 @@ def login():
                 if bcrypt.check_password_hash(user['password'].encode('utf-8'), form['password'].encode('utf-8')):
                     remember_me = False
                     login_user(user, remember_me)
-                    return redirect(url_for('main.root',theme=g.current_theme))
+                    return redirect(url_for('main.root',theme=g.current_theme,lang_code=g.current_lang))
                 else:
                     error = "Invalid username/password"
-                    return redirect(url_for('main.root',theme=g.current_theme))
+                    return redirect(url_for('main.root',theme=g.current_theme,lang_code=g.current_lang))
             elif user['role'] == 'admin-user':
                 if bcrypt.check_password_hash(user['password'].encode('utf-8'), form['password'].encode('utf-8')):
                     remember_me = False
@@ -28,21 +28,21 @@ def login():
                     return redirect(url_for('admin.index'))
                 else:
                     error = "Invalid username/password"
-                    return redirect(url_for('main.root',theme=g.current_theme))
+                    return redirect(url_for('main.root',theme=g.current_theme,lang_code=g.current_lang))
         else:
-            return redirect(url_for('main.root',theme=g.current_theme))
+            return redirect(url_for('main.root',theme=g.current_theme,lang_code=g.current_lang))
 
 
 @mod_auth.route('/logout', methods=['GET'])
 def logout():
     logout_user()
-    return redirect(url_for('main.root',theme=g.current_theme))
+    return redirect(url_for('main.root',theme=g.current_theme,lang_code=g.current_lang))
 
 
 @mod_auth.route('/register/user', methods=['GET', 'POST'])
 def registeruser():
     if request.method == "GET":
-        return render_template('mod_auth/register.html',theme=g.current_theme)
+        return render_template('mod_auth/register.html',theme=g.current_theme,lang_code=g.current_lang)
     else:
         form = request.form
         email = form['email']
@@ -68,4 +68,4 @@ def registeruser():
                 result = user_datastore.add_role_to_user(user, role)
                 login_user(user)
 
-        return redirect(url_for('main.root',theme=g.current_theme))
+        return redirect(url_for('main.root',theme=g.current_theme,lang_code=g.current_lang))
