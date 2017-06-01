@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+    <div class="col-md-offset-2 col-md-8">
+        <div class="col-md-12 page-heading">
+            <h2>Notes for <b>{{ project['name'] }} </b></h2>
+        </div>
+    </div>
+    <div class="row">
+        <hr class="hr-top"/>
+    </div>
+    <div class="col-md-3 notes-main">
+        <ul class="list-notes">
+            {% for note in project['notes'] %}
+                <li  {% if loop.index==1 %} class="selected_note li_{{ note['note_id'] }}" {% else %} class=" li_{{ note['note_id'] }}" {% endif %}>
+                    <a href="#" data-id="{{ note['note_id'] }}" class="note">{{ note['subject'] }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-md-8">
+        {% for note in project['notes'] %}
+            <div class="notes_content note_{{ note['note_id'] }}" {% if loop.index!=1 %} style="display:none" {% endif %}>
+                <p><b>Email Body:</b> <br/>{{ note['text'] }}</p>
+                <p><b>Images:</b></p>
+                {% for image in note['images'] %}
+                   <div class="col-md-3">
+                        <img src="{{ url_for('static', filename='assets/')}}{{ image }}" class="img-responsive">
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    <script>
+        $(document).ready(function(){
+            $('.note').on('click',function(e){
+                var note_id=$(this).attr('data-id');
+                $('.notes_content').css('display','none');
+                $('.list-notes li').removeClass('selected_note');
+                $('.li_'+note_id).addClass('selected_note');
+                $('.note_'+note_id).css('display','block');
+            })
+        })
+    </script>
+{% endblock %}

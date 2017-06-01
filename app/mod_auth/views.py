@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect,Response, url_for, g, current_app
-from app import user_datastore, bcrypt, user_utils, mongo,UPLOAD_FOLDER,ALLOWED_EXTENSIONS
+from app import user_datastore, bcrypt, user_utils, mongo
 from flask.ext.security import login_user, logout_user
 import os, json
 

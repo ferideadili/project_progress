@@ -14,9 +14,8 @@ from flask.ext.babel import Babel
 from app.utils.user_mongo_utils import UserMongoUtils
 from app.utils.mongo_projects_utils import MongoProjectsUtils
 from app.utils.mongo_settings_utils import MongoSettingsUtils
+from app.utils.projects import projects
 
-UPLOAD_FOLDER =join(dirname(realpath(__file__)), 'static/uploads/')
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 mongo = PyMongo()
 
 login_manager = LoginManager()
@@ -26,6 +25,7 @@ login_manager = LoginManager()
 user_utils = UserMongoUtils(mongo)
 project_utils = MongoProjectsUtils(mongo)
 settings_utils = MongoSettingsUtils(mongo)
+projects=projects()
 
 db = MongoEngine()
 
@@ -42,7 +42,7 @@ babel = Babel()
 def create_app():
     # Here we  create flask app
     app = Flask(__name__)
-    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
     # We load configurations
     load_config(app)
 
