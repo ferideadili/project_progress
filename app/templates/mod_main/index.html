@@ -1,24 +1,32 @@
 {% extends 'layout.html' %}
 {% block body %}
-    <div class="row">
-        <div class="col-md-offset-2 col-md-8 projects">
+
+    <div class="col-md-offset-2 col-md-8 projects">
+        <div class="row">
             {% for item in projects %}
                 <div class="col-md-6">
                     <div class="tile">
                         <p class="title">{{ item.name }}</p>
                         <p class="description">{{ item.name }}</p>
                         <div class="col-md-12 tile-options">
-                            <div class="col-md-6 options"><p><a href="#">Retail</a></p></div>
-                            <div class="col-md-6 options"><p><a href="#">Healthcare</a></p></div>
+                            <div class="col-md-6 options"><p><a
+                                    href="{{ url_for('main.options',theme=g.current_theme,lang_code=g.current_lang,project_id=item.id,option="retail") }}">Retail</a>
+                            </p></div>
+                            <div class="col-md-6 options"><p><a
+                                    href="{{ url_for('main.options',theme=g.current_theme,lang_code=g.current_lang,project_id=item.id,option="healthcare") }}">Healthcare</a>
+                            </p></div>
                         </div>
                         <div class="col-md-12 other">
                             <div class="col-md-6"><p>Created at: {{ item.createdAt }}</p></div>
-                            <div class="col-md-6 emails"><a href="{{ url_for('main.notes',theme=g.current_theme,lang_code=g.current_lang,project_id=item.id) }}"><span class="number">{{ item.notes|length }}</span><i class="fa fa-envelope" aria-hidden="true"></i></a></div>
+                            <div class="col-md-6 emails"><a
+                                    href="{{ url_for('main.notes',theme=g.current_theme,lang_code=g.current_lang,project_id=item.id) }}"><span
+                                    class="number">{{ item.notes|length }}</span><i class="fa fa-envelope"
+                                                                                    aria-hidden="true"></i></a></div>
                         </div>
                     </div>
                 </div>
             {% endfor %}
-
         </div>
     </div>
+
 {% endblock %}
