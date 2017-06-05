@@ -1,6 +1,5 @@
 {% extends 'layout.html' %}
 {% block body %}
-
     <div class="col-md-offset-2 col-md-8">
         <div class="col-md-12 page-heading">
             <h2>Notes for <b>{{ project['name'] }} </b></h2>
@@ -32,14 +31,12 @@
         {% endfor %}
     </div>
     <script>
-        $(document).ready(function(){
-            $('.note').on('click',function(e){
-                var note_id=$(this).attr('data-id');
-                $('.notes_content').css('display','none');
-                $('.list-notes li').removeClass('selected_note');
-                $('.li_'+note_id).addClass('selected_note');
-                $('.note_'+note_id).css('display','block');
-            })
-        })
+         $('.note').on('click',function(e){
+             var note_id=$(this).attr('data-id');
+             $('.notes_content').css('display','none');
+             $('.list-notes li').removeClass('selected_note');
+             $('.li_'+note_id).addClass('selected_note');
+             $('.note_'+note_id).css('display','block');
+         })
     </script>
 {% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{% block body %}
+    <div class="col-md-offset-2 col-md-8">
+        <div class="col-md-12 page-heading">
+            <h2><span class="option_url">{{ option }}</span> for <b>{{ project['name'] }} </b></h2>
+        </div>
+    </div>
+    <div class="row">
+        <hr class="hr-top"/>
+    </div>
+    <div class="col-md-offset-2 col-md-8">
+        <div class="col-md-offset-4 col-md-4 options">
+            {% if option=="retail" %}
+            <select class="form-control" id="select_option">
+                <option value="customer_satisfaction" selected>Customer satisfaction</option>
+                <option value="stock">Stock</option>
+                <option value="sales">Sales</option>
+            </select>
+            {% endif %}
+            {% if option=="healthcare" %}
+            <select class="form-control" id="select_option">
+                <option value="customer_satisfaction" selected>Customer satisfaction</option>
+            </select>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-md-offset-2 col-md-8">
+    {% if option=="healthcare"%}
+        <div id="healthcare-column-chart-container" class="chart"></div>
+    {% else %}
+        <div id="retail-column-chart-container" class="chart"></div>
+    {% endif %}
+    </div>
+
+    <script>
+        var datas={{ project | safe }};
+        var selected_option="";
+        var option ="{{ option }}";
+        var container="";
+        if (option =="healthcare"){
+            container="healthcare-column-chart-container";
+        }else{
+            container="retail-column-chart-container";
+        }
+        $('#select_option').click(function(){
+            selected_option=$(this).val();
+            drawStaticChart(datas,selected_option,container);
+        });
+        drawStaticChart(datas,selected_option,container);
+
+    </script>
+
+{% endblock %}
