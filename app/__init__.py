@@ -109,10 +109,7 @@ def load_config(app):
     app.config['SECURITY_LOGIN_USER_TEMPLATE'] = config.get('Authentication', 'LOGIN_USER_TEMPLATE_PATH')
     app.config['SECURITY_REGISTER_USER_TEMPLATE'] = config.get('Authentication', 'REGISTER_USER_TEMPLATE_PATH')
     app.config['SECURITY_REGISTERABLE'] = config.get('Authentication', 'CAN_REGISTER')
-    app.config['SECURITY_CONFIRMABLE'] = config.get('Authentication', 'CONFIRM_EMAIL')
-    app.config['SECURITY_SEND_REGISTER_EMAIL'] = config.get('Authentication', 'SEND_REGISTER_EMAIL')
-    app.config['SECURITY_SEND_PASSWORD_CHANGE_EMAIL'] = config.get('Authentication', 'SEND_PASSWORD_CHANGE_EMAIL')
-    app.config['SECURITY_CONFIRM_EMAIL_WITHIN'] = bool(config.get('Authentication', 'SEND_CONFIRM_EMAIL_WITHIN'))
+
     app.config['SECURITY_CHANGEABLE'] = config.get('Authentication', 'PASSWORD_CHANGEABLE')
     app.config['SECURITY_PASSWORD_HASH'] = config.get('Authentication', 'PASSWORD_HASH')
     app.config['SECURITY_PASSWORD_SALT'] = config.get('Authentication', 'PASSWORD_SALT')
