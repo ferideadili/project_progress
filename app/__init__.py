@@ -5,7 +5,7 @@ import ConfigParser
 from flask.ext.pymongo import PyMongo
 from logging.handlers import RotatingFileHandler
 
-from flask.ext.security import Security, MongoEngineUserDatastore
+from flask.ext.security import Security, MongoEngineUserDatastore, UserMixin, RoleMixin
 from flask.ext.bcrypt import Bcrypt
 from flask.ext.login import LoginManager
 from bson.objectid import ObjectId
