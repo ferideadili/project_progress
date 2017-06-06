@@ -63,7 +63,7 @@
                     <ul class="nav navbar-nav navbar-right lang">
                         {% if current_user.is_authenticated %}
                             {% if current_user.role == 'admin-user' %}
-                                <li><a href="#" class="title-menu-text"><i class="fa fa-list" aria-hidden="true"></i> Dashboard</a></li>
+                                <li><a href="{{ url_for("admin.index") }}" class="title-menu-text"><i class="fa fa-list" aria-hidden="true"></i> Dashboard</a></li>
                              {% endif %}
                             <li><a href="{{url_for('auth.logout',lang_code=g.current_lang, theme=g.current_theme)}}" class="title-menu-text"><i class="fa fa-power-off" aria-hidden="true"></i> Log Out</a></li>
                         {% else %}
